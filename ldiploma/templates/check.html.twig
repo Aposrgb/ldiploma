@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ростелеком</title>
+    <link rel="icon" href="../assets/img/avatar6.png">
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../assets/css/custom.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<ul id="slide-out" class="side-nav fixed z-depth-4">
+    <li>
+        <div class="userView">
+            <div class="background">
+                <img src="../assets/img/photo1.png">
+            </div>
+            <a href="#!user"><img class="circle" src="../assets/img/avatar6.png"></a>
+            <a href="#!name"><span class="white-text name">Добро пожаловать,</span></a>
+            <a href="#!email"><span class="white-text email">администратор!</span></a>
+        </div>
+    </li>
+
+
+    <li class="no-padding">
+        <a class="collapsible-header" href="{{ path('lk_admin') }}">Заявки клиента<i class="material-icons pink-item">person</i></a>
+        <a class="collapsible-header" href="{{ path('app_logout') }}">Выйти<i class="material-icons pink-item"></i></a>
+    </li>
+
+</ul>
+<main>
+    <section class="content">
+        <div class="page-announce valign-wrapper">
+            <a href="#" data-activates="slide-out" class="button-collapse valign hide-on-large-only">
+                <i class="material-icons">menu</i>
+            </a>
+            <h1 class="page-announce-text valign">Заявка
+                №{{ appl.id }} {% if appl.owner.type == 1 %}Физ. лица{% else %}Юр. лица{% endif %}</h1>
+        </div>
+        {% if appl.status == 1 %}
+            <div style="margin: 40px">
+                {% if appl.owner.type == 1 %}
+                    <h5 class="page-announce-text valign">Личные данные</h5>
+                    <div style="margin: 40px">
+                        <ul>
+                            <li>Фамилия: {{ appl.owner.surname }}</li>
+                            <li>Имя: {{ appl.owner.name }}</li>
+                            <li>Отчество: {{ appl.owner.patronymic ?? '' }}</li>
+                        </ul>
+                        Паспорт
+                        <ul style="margin: 10px">
+                            <li>Серия: {{ appl.owner.passSerias }}</li>
+                            <li>Номер: {{ appl.owner.passNumber }}</li>
+                        </ul>
+                        <ul>
+                            <li>Телефон: {{ appl.owner.telephone }}</li>
+                            <li>Адрес электронной почты: {{ appl.owner.email }}</li>
+                        </ul>
+                        Адрес
+                        <ul style="margin: 10px">
+                            <li>Индекс: {{ appl.owner.index ?? '' }}</li>
+                            <li>Область: {{ appl.owner.locality ?? '' }}</li>
+                            <li>Район: {{ appl.owner.district ?? '' }}</li>
+                            <li>Улица: {{ appl.owner.street ?? '' }}</li>
+                            <li>Дом: {{ appl.owner.house ?? '' }}</li>
+                            <li>Квартира: {{ appl.owner.apartment ?? '' }}</li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <h5 class="page-announce-text valign">Данные организации</h5>
+                    <div style="margin: 40px; background: #e4e4e457;padding: 20px;">
+                        <ul>
+                            <li>Наименование: {{ appl.owner.nameOrg }}</li>
+                        </ul>
+                        <ul>
+                            <li>Юридический адрес:
+                                {{ appl.owner.urAddress ?? '' }}
+                            </li>
+                            <li>Почтовый адрес: {{ appl.owner.postAddress ?? '' }}</li>
+                        </ul>
+                        <ul>
+                            <li>Расчетный счет:
+                                {{ appl.owner.payAcc ?? '' }}
+                            </li>
+                            <li>ИНН: {{ appl.owner.inn ?? '' }}</li>
+                            <li>КПП: {{ appl.owner.kpp ?? '' }}</li>
+                            <li>КПП: {{ appl.owner.bik ?? '' }}</li>
+                        </ul>
+                        <ul>
+                            <li>Доверенное лицо:
+                                {{ appl.owner.trustPers ?? '' }}
+                            </li>
+                            <li>Контактный телефон: {{ appl.owner.telephone ?? '' }}</li>
+                        </ul>
+                    </div>
+                {% endif %}
+                <h5 class="page-announce-text valign">Информация об услуге</h5>
+                <div style="margin: 40px; background: #e4e4e457;padding: 20px;">
+                    <ul>
+                        {% for tar in appl.tariffes %}
+                            <li>{{ tar.name }}
+                                <button disabled>{{ appl.count }}</button>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <h5 class="page-announce-text valign">Дополнительная информация</h5>
+                <form method="post">
+                    <div style="margin: 40px; background: #e4e4e457;padding: 20px;">
+                        <input name="appId" type="number" hidden value="{{ appl.id }}">
+                        <ul>
+                            <li>Технология:
+                                <select name="tech">
+                                    <option value="DOCSIS">DOCSIS</option>
+                                    <option value="xDSL">xDSL</option>
+                                    <option value="PON">PON</option>
+                                    <option value="FTTx">FTTx</option>
+                                </select>
+                            </li>
+                            <li>Дата и время визита:
+                                <input required name="dateVisit" type="datetime-local">
+                            </li>
+                            <li>Доп. информация:
+                                <input name="dopInform" type="text">
+                            </li>
+                        </ul>
+                    </div>
+                    <button class="btn" type="submit">Продолжить</button>
+                </form>
+            </div>
+        {% else %}
+            <div style="margin: 40px;">
+                <input hidden id="appId" appId="{{ appl.id }}">
+                {% if appl.owner.type == 1 %}
+                    <div style="display: flex;">
+                        <p>
+                            Клиент
+                        </p>
+                        <input disabled type="text" style="margin-left: 30px;color: black" value="{{ appl.owner.surname }} {{ appl.owner.name }} {{ appl.owner.patronymic ?? '' }}">
+                    </div>
+                    <button class="btn" onclick="get(1)">Договор</button>
+                    <button class="btn" onclick="get(2)">Наряд</button>
+                {% else %}
+                    <div style="display: flex;">
+                        <p>
+                            Организация
+                        </p>
+                        <input disabled type="text" style="margin-left: 30px;color: black" value="{{ appl.owner.nameOrg }}">
+                    </div>
+                    <button class="btn" onclick="get(1)">Договор</button>
+                    <button class="btn" onclick="get(2)">Наряд</button>
+                {% endif %}
+            </div>
+        {% endif %}
+    </section>
+</main>
+<footer class="page-footer">
+    <div class="footer-copyright">
+        <div class="container">
+            © 2022 ПАО «Ростелеком».
+        </div>
+    </div>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+<script>
+    // Hide sideNav
+    $('.button-collapse').sideNav({
+        menuWidth: 300, // Default is 300
+        edge: 'left', // Choose the horizontal origin
+        closeOnClick: false, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        draggable: true // Choose whether you can drag to open on touch screens
+    });
+    $(document).ready(function () {
+        $('.tooltipped').tooltip({delay: 50});
+    });
+    $('select').material_select();
+    $('.collapsible').collapsible();
+</script>
+
+<script>
+
+    async function get(type){
+        let id = parseInt(document.getElementById('appId').getAttribute('appid'))
+        let data = await fetch('{{ path('get_app_doc') }}?type='+ type + '&id=' + id, {method: 'get'}).then(data => data.json())
+        window.location.href = "{{path('index')}}" + data['link']
+    }
+
+</script>
+
+</body>
+</html>

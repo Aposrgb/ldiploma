@@ -1,0 +1,67 @@
+<?php
+    session_start();//Запускаем сессию
+?>
+ 
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+		<title>Ростелеком</title>
+		<link rel="icon" href = "assets/img/avatar6.png">
+        <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+		<link href="https://fonts.googleapis.com/css2?family=Bona+Nova&display=swap" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+    </head>
+    <body>
+        <div id="header" class ="header">
+            <div id="auth_block">
+					<div id="link_register" class ="link_register">
+                       <a href="/index.html" class ="glav">Главная</a>	
+                    </div>
+			
+                    <div id="link_auth">
+                        <a href="/form_register.php">Регистрация</a>
+                    </div>
+             
+                    <div id="link_auth">
+                        <a href="/form_auth.php">Авторизация</a>
+                    </div>	
+            <div class="clear"></div>
+        </div>
+
+
+    <div id="form_auth">
+        <h2>Форма авторизации</h2>
+        <form action="auth.php" method="post" name="form_auth">
+            <table>
+                <tbody><tr>
+                    <td> Email: </td>
+                    <td>
+                        <input type="email" name="email" required="required"><br>
+                        <span id="valid_email_message" class="mesage_error"></span>
+                    </td>
+                </tr>
+          
+                <tr>
+                    <td> Пароль: </td>
+                    <td>
+                        <input type="password" name="password" placeholder="минимум 6 символов" required="required"><br>
+                        <span id="valid_password_message" class="mesage_error"></span>
+                    </td>
+                </tr>
+                 
+                <tr>
+                    <td colspan="2" >
+                        <input type="submit" name="btn_submit_auth" value="Войти">
+                    </td>
+                </tr>
+            </tbody></table>
+        </form>
+    </div>
+ 
+        <div id="footer">
+		&copy; GK cosmetic, 2022
+        </div>
+    </body>
+</html>

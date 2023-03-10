@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Ростелеком</title>
+    <link rel="icon" href = "../assets/img/avatar6.png">
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="../assets/css/custom.css" rel="stylesheet" type="text/css" />
+  </head>
+  
+  <body>
+    <ul id="slide-out" class="side-nav fixed z-depth-4">
+      <li>
+        <div class="userView">
+          <div class="background">
+            <img src="../assets/img/photo1.png">
+          </div>
+          <a href="#!user"><img class="circle" src="../assets/img/avatar6.png"></a>
+          <a href="#!name"><span class="white-text name">Добро пожаловать,</span></a>
+          <a href="#!email"><span class="white-text email">администратор!</span></a>
+        </div>
+      </li>
+    
+
+      <li class="no-padding">
+         <a class="collapsible-header" href="{{ path('lk_admin') }}">Заявки клиента<i class="material-icons pink-item">person</i></a>
+         <a class="collapsible-header" href="{{ path('app_logout') }}">Выйти<i class="material-icons pink-item"></i></a>
+      </li>
+
+  </ul>
+  <main>
+    <section class="content">
+      
+      <div class="page-announce valign-wrapper">
+        <a href="#" data-activates="slide-out" class="button-collapse valign hide-on-large-only">
+          <i class="material-icons">menu</i>
+        </a>
+        <h1 class="page-announce-text valign">Заявки</h1>
+      </div>
+      
+
+      <div id="posttable" class="container">
+        <table class="responsive-table striped hover centered" id="names-table">
+          <thead>
+            <tr>
+              <th>Номер заявки</th>
+              <th>Тип</th>
+              <th>ФИО заказчика</th>
+              <th>Имя организации</th>
+              <th>Услуги</th>
+              <th>Дата</th>
+              <th>Действие</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for app in apps %}
+              <tr id="app_{{ app.id }}" app_id="{{ app.id }}">
+                <td><a>{{ app.id }}</a></td>
+                <td><a>{% if app.owner.type == 1 %}Физ. лицо{% else %}Юр. лицо{% endif %}</a></td>
+                <td><a>{{ app.owner.name }} {{ app.owner.surname }} {{ app.owner.patronymic ?? '' }}</a></td>
+                <td><a>{{ app.owner.nameOrg ?? ''}}</a></td>
+                <td><a>{{ app.tariffes|map(t => t.name)|join(', ') }}</a></td>
+                <td><a>{{ app.createdAt|date('Y-m-d H:i:s') }}</a></td>
+                <td>
+                  <div class="btn-toolbar">
+                    <a>
+                      <button onclick="check('app_' + {{ app.id }})" class="btn" type="submit">
+                        <i class="material-icons"><b>Принять</b></i>
+                      </button>
+                    </a>
+                    <a style="display:block;margin-top: 10px">
+                      <button onclick="deletes('app_' + {{ app.id }})" class="btn" type="submit">
+                        <i class="material-icons"><b>Удалить</b></i>
+                      </button>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  </main>
+  <footer class="page-footer">
+    <div class="footer-copyright">
+      <div class="container">
+        © 2022 ПАО «Ростелеком».
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+  <script>
+  // Hide sideNav
+  $('.button-collapse').sideNav({
+  menuWidth: 300, // Default is 300
+  edge: 'left', // Choose the horizontal origin
+  closeOnClick: false, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+    draggable: true // Choose whether you can drag to open on touch screens
+    });
+    $(document).ready(function(){
+    $('.tooltipped').tooltip({delay: 50});
+    });
+    $('select').material_select();
+    $('.collapsible').collapsible();
+
+    </script>
+    <script>
+      async function deletes(ids) {
+        let id = document.getElementById(ids).getAttribute('app_id')
+        await fetch("{{ path('delete') }}?id="+id, {method: 'get' }).then(data => data.json())
+        window.location.reload()
+      }
+      function check(ids) {
+        let id = document.getElementById(ids).getAttribute('app_id')
+        window.location.href = "{{ path('check') }}?id=" + id
+      }
+    </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</body>
+</html>

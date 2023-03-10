@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Ростелеком</title>
+    <link rel="icon" href = "assets/img/avatar6.png">
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
+  </head>
+  
+  <body>
+    <ul id="slide-out" class="side-nav fixed z-depth-4">
+      <li>
+        <div class="userView">
+          <div class="background">
+            <img src="assets/img/photo1.png">
+          </div>
+          <a href="#!user"><img class="circle" src="assets/img/avatar6.png"></a>
+          <a href="#!name"><span class="white-text name">Добро пожаловать,</span></a>
+          <a href="#!email"><span class="white-text email">клиент!</span></a>
+        </div>
+      </li>
+
+      <li class="no-padding">
+         <a class="collapsible-header" href="u_userdetails.html.twig">Личный кабинет<i class="material-icons blue-item">person</i></a>
+      </li>
+
+      <li>
+        <a href="u_zayvka.html" class="collapsible-header"><i class="material-icons pink-item">thumbs_up_down</i>Заявки</a>
+      </li>
+
+  </ul>
+  <main>
+    <section class="content">
+      
+      <div class="page-announce valign-wrapper">
+        <a href="#" data-activates="slide-out" class="button-collapse valign hide-on-large-only">
+          <i class="material-icons">menu</i>
+        </a>
+        <h1 class="page-announce-text valign">Список заявок</h1>
+      </div>
+      
+
+      <div id="posttable" class="container">
+        <table class="responsive-table striped hover centered" id="names-table">
+          <thead>
+            <tr>
+              <th>Номер заявки</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a>001</a></td>
+            </tr>
+            <tr>
+              <td><a>002</a></td>
+            </tr>
+            <tr>
+              <td><a>003</a></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="center-align"><input class="vniz btn btn-success" type="submit" value="Создать" /></div>
+      </div>
+    </div>
+  </section>
+  </main>
+  <footer class="page-footer">
+    <div class="footer-copyright">
+      <div class="container">
+        © 2022 ПАО «Ростелеком».
+      </div>
+    </div>
+  </footer>
+  
+  <!-- So this is basically a hack, until I come up with a better solution. autocomplete is overridden
+  in the materialize js file & I don't want that.
+  -->
+  <!-- Yo dawg, I heard you like hacks. So I hacked your hack. (moved the sidenav js up so it actually works) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+  <script>
+  // Hide sideNav
+  $('.button-collapse').sideNav({
+  menuWidth: 300, // Default is 300
+  edge: 'left', // Choose the horizontal origin
+  closeOnClick: false, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+    draggable: true // Choose whether you can drag to open on touch screens
+    });
+    $(document).ready(function(){
+    $('.tooltipped').tooltip({delay: 50});
+    });
+    $('select').material_select();
+    $('.collapsible').collapsible();
+    </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</body>
+</html>

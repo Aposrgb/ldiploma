@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Ростелеком</title>
+    <link rel="icon" href="assets/img/avatar6.png">
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css"/>
+    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="assets/css/custom.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<ul id="slide-out" class="side-nav fixed z-depth-4">
+    <li>
+        <div class="userView">
+            <div class="background">
+                <img src="assets/img/photo1.png">
+            </div>
+            <a href="#!user"><img class="circle" src="assets/img/avatar6.png"></a>
+            <a href="#!name"><span class="white-text name">Добро пожаловать,</span></a>
+            <a href="#!email"><span class="white-text email">клиент!</span></a>
+        </div>
+    </li>
+
+    <li class="no-padding">
+        <a class="collapsible-header" href="{{ path('lk') }}">Личный кабинет<i
+                    class="material-icons blue-item">person</i></a>
+    </li>
+
+    <li>
+        <a href="{{ path('applications') }}" class="collapsible-header"><i class="material-icons pink-item">thumbs_up_down</i>Заявки</a>
+    </li>
+
+</ul>
+<main>
+    <section class="content">
+
+        <div class="page-announce valign-wrapper">
+            <a href="#" data-activates="slide-out" class="button-collapse valign hide-on-large-only">
+                <i class="material-icons">menu</i>
+            </a>
+            <h1 class="page-announce-text valign">Создание заявки</h1>
+        </div>
+
+        <div id="posttable" class="container">
+            <h4 class="hh4">Выбор услуги</h4>
+
+            {% for service in services %}
+                <h5 class="hh5">{{ service.name }}</h5>
+                <div id="id{{  loop.index-1 }}">
+                    {% for tariff in service.tariffes %}
+                        <input name="{{ service.id }}" id="{{ tariff.id }}" type="radio"><label
+                            for="{{ tariff.id }}">{{ tariff.name }}</label>
+                        <p class="otstup">{{ tariff.description|split("\n")|join('<br>')|raw }}</p>
+                        <input {% if app.user.type == 2 %}hidden{% endif %} id="count_{{ tariff.id }}" type="number">
+                        {% if app.user.type == 2 %}
+                            <div>
+                                <input name="month_{{ tariff.id }}" id="12_month_{{ tariff.id }}" type="radio">
+                                <label for="12_month_{{ tariff.id }}">Кол-во 12</label>
+                                <input name="month_{{ tariff.id }}" id="24_month_{{ tariff.id }}" type="radio">
+                                <label for="24_month_{{ tariff.id }}">Кол-во 24</label>
+                                <input name="month_{{ tariff.id }}" id="36_month_{{ tariff.id }}" type="radio">
+                                <label for="36_month_{{ tariff.id }}">Кол-во 36</label>
+                                <input name="month_{{ tariff.id }}" id="60_month_{{ tariff.id }}" type="radio">
+                                <label for="60_month_{{ tariff.id }}">Кол-во 60</label>
+                            </div>
+
+                            <br>
+                            <br>
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+            {% endfor %}
+
+
+            <div class="center-align">
+                <button onclick="sendTariff()" type="submit" class="vniz1 btn btn-success"><i><b>Отправить</b></i>
+                </button>
+            </div>
+        </div>
+    </section>
+</main>
+<footer class="page-footer">
+    <div class="footer-copyright">
+        <div class="container">
+            © 2022 ПАО «Ростелеком».
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+<script>
+    // Hide sideNav
+    $('.button-collapse').sideNav({
+        menuWidth: 300, // Default is 300
+        edge: 'left', // Choose the horizontal origin
+        closeOnClick: false, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+        draggable: true // Choose whether you can drag to open on touch screens
+    });
+    $(document).ready(function () {
+        $('.tooltipped').tooltip({delay: 50});
+    });
+    $('select').material_select();
+    $('.collapsible').collapsible();
+
+    let ids = [
+        {% for service in services %}
+        {% for tariff in service.tariffes %}
+        {{ tariff.id }},
+        {% endfor %}
+        {% endfor %}]
+
+    async function sendTariff() {
+        let checked = [], months = [12,24,36,60]
+        for (let id of ids) {
+            if (document.getElementById(id).checked) {
+                {% if app.user.type == 2 %}
+                let isCheck = false
+                for(let month of months){
+                    if (document.getElementById(month + "_month_" + id).checked) {
+                        checked.push({
+                            id: id,
+                            count: month
+                        })
+                        isCheck = true
+                    }
+                }
+                if(!isCheck){
+                    checked.push({
+                        id: id,
+                        count: 12
+                    })
+                }
+                {% else %}
+                if (document.getElementById("count_" + id).value !== '') {
+                    checked.push({
+                        id: id,
+                        count: parseInt(document.getElementById("count_" + id).value)
+                    })
+                } else {
+                    checked.push({
+                        id: id,
+                        count: 1
+                    })
+                }
+                {% endif %}
+
+            }
+        }
+        await fetch('{{ path("create_apps_post") }}', {
+            method: "post",
+            body: JSON.stringify({
+                application: checked
+            })
+        })
+        window.location.href = '{{ path('applications') }}'
+    }
+
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</body>
+</html>

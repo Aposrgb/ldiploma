@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/ldiploma/vendor/composer" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/cache-contracts" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/runtime" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/var-exporter" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/routing" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/cache" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/doctrine-bridge" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/security-core" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/dependency-injection" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/security-http" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/config" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/property-access" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/property-info" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/error-handler" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/twig-bundle" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/security-csrf" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/stopwatch" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/maker-bundle" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/flex" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/password-hasher" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/nikic/php-parser" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/framework-bundle" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/http-foundation" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/translation-contracts" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/http-kernel" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/twig-bridge" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/dotenv" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/security-bundle" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/sensio/framework-extra-bundle" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/twig/extra-bundle" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/doctrine/instantiator" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/doctrine/event-manager" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/doctrine/sql-formatter" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/doctrine/orm" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/doctrine/collections" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/doctrine/doctrine-bundle" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/doctrine/persistence" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/doctrine/migrations" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/doctrine/inflector" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/doctrine/common" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/doctrine/doctrine-migrations-bundle" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/symfony/serializer" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/laminas/laminas-escaper" />
+      <path value="$PROJECT_DIR$/ldiploma/vendor/phpoffice/phpword" />
+    </include_path>
+  </component>
+  <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
+</project>

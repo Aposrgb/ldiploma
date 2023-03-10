@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ростелеком</title>
+    <link rel="icon" href="assets/img/avatar6.png">
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+
+    <link href="assets/css/custom1.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+<script>
+    function startu() {
+        document.getElementById("hideuorf").style.display = "none";
+        document.getElementById("showu").style.display = "block";
+    }
+
+    function startf() {
+        document.getElementById("hideuorf").style.display = "none";
+        document.getElementById("showf").style.display = "block";
+    }
+
+    function starts() {
+        document.getElementById("hideuorf").style.display = "none";
+        document.getElementById("showr").style.display = "block";
+    }
+
+
+    function registershow(isP) {
+        if (isP){
+            document.getElementById("showu").style.display = "none";
+            document.getElementById("registerF").style.display = "block";
+        }
+        else {
+            document.getElementById("showf").style.display = "none";
+            document.getElementById("registerU").style.display = "block";
+        }
+    }
+
+    async function sendReg(isP){
+        if (isP){
+            let name = document.getElementById("nameF").value,
+                surname = document.getElementById("surnameF").value,
+                email = document.getElementById("emailF").value,
+                password = document.getElementById("passwordF").value
+            await fetch("{{ path("register") }}", {
+                method: "post", body: JSON.stringify({
+                    isP: true,
+                    name: name,
+                    surname: surname,
+                    email: email,
+                    password: password
+                })
+            })
+            document.getElementById("showu").style.display = "block";
+            document.getElementById("registerF").style.display = "none";
+        }
+        else {
+            let nameOrg = document.getElementById("nameU").value,
+                email = document.getElementById("emailU").value,
+                password = document.getElementById("passwordU").value
+            await  fetch("{{ path("register") }}", {
+                method:"post", body: JSON.stringify({
+                    isP:false,
+                    nameOrg:nameOrg,
+                    email:email,
+                    password:password
+                })
+            })
+            document.getElementById("showf").style.display = "block";
+            document.getElementById("registerU").style.display = "none";
+        }
+    }
+</script>
+<main>
+
+
+    <section class="content">
+        <div class="page-announce valign-wrapper">
+            <h1 class="page-announce-text valign">Клиент</h1>
+        </div>
+        <div id="posttable" class="butt">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            <div id="hideuorf" style="display:block;">
+                <a href="#">
+                    <button class="butt2" onclick="startu()">
+                        <i><b>Физическое лицо</b></i>
+                    </button>
+                </a>
+                <a href="#">
+                    <button class="butt3" onclick="startf()">
+                        <i><b>Юридическое лицо</b></i>
+                    </button>
+                </a>
+                <a href="#">
+                    <button class="butt3" onclick="starts()">
+                        <i><b>Сотрудник</b></i>
+                    </button>
+                </a>
+            </div>
+        </div>
+        </div>
+        <div id="showf" style="display: none;">
+            <h2>Форма авторизации Юридического лица</h2>
+            <form method="post" name="form_auth">
+                <label for="inputEmail">Почта</label>
+                <input type="email" name="email" id="inputEmail" class="form-control" autocomplete="email" required
+                       autofocus>
+                <label for="inputPassword">Пароль</label>
+                <input type="password" name="password" id="inputPassword" class="form-control"
+                       autocomplete="current-password" required>
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+                <input type="submit" name="btn_submit_auth" value="Войти">
+                <button type="button" onclick="registershow(false)">Регистрация</button>
+            </form>
+        </div>
+        </div>
+        </div>
+    </section>
+    <div id="showu" style="display:none;">
+        <h2>Форма авторизации Физического лица</h2>
+        <form method="post" name="form_auth">
+            <label for="inputEmail">Почта</label>
+            <input type="email" name="email" id="inputEmail" class="form-control" autocomplete="email" required
+                   autofocus>
+            <label for="inputPassword">Пароль</label>
+            <input type="password" name="password" id="inputPassword" class="form-control"
+                   autocomplete="current-password" required>
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+            <input type="submit" name="btn_submit_auth" value="Войти">
+            <button type="button" onclick="registershow(true)">Регистрация</button>
+        </form>
+    </div>
+    <div id="showr" style="display: none;">
+        <h2>Форма авторизации</h2>
+        <form method="post" name="form_auth">
+            <label for="inputEmail">Почта</label>
+            <input type="email" name="email" id="inputEmail" class="form-control" autocomplete="email" required
+                   autofocus>
+            <label for="inputPassword">Пароль</label>
+            <input type="password" name="password" id="inputPassword" class="form-control"
+                   autocomplete="current-password" required>
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+            <input type="submit" name="btn_submit_auth" value="Войти">
+        </form>
+    </div>
+    <div id="registerF" style="display:none;">
+        <h2>Форма регистрации Физического лица</h2>
+        <label for="nameF">Имя</label>
+        <input type="text" name="email" id="nameF" class="form-control" required
+               autofocus>
+        <label for="surnameF">Фамилия</label>
+        <input type="text" name="email" id="surnameF" class="form-control" required
+               autofocus>
+        <label for="emailF">Почта</label>
+        <input type="email" name="email" id="emailF" class="form-control" autocomplete="email" required
+               autofocus>
+        <label for="passwordF">Пароль</label>
+        <input type="password" name="password" id="passwordF" class="form-control"
+               autocomplete="current-password" required>
+        <button type="button" onclick="sendReg(true)">Регистрация</button>
+
+    </div>
+    <div id="registerU" style="display:none;">
+        <h2>Форма регистрации Юридического лица</h2>
+        <label for="nameU">Наименование</label>
+        <input type="text" name="email" id="nameU" class="form-control" required
+               autofocus>
+        <label for="emailГ">Почта</label>
+        <input type="email" name="email" id="emailU" class="form-control" autocomplete="email" required
+               autofocus>
+        <label for="passwordU">Пароль</label>
+        <input type="password" name="password" id="passwordU" class="form-control"
+               autocomplete="current-password" required>
+        <button type="button" onclick="sendReg(false)" >Регистрация</button>
+    </div>
+</main>
+<footer class="page-footer">
+    <div class="footer-copyright">
+        <div class="container">
+            © 2022 ПАО «Ростелеком».
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</body>
+
+</html>
